@@ -1,0 +1,107 @@
+<!-- Generic page template for About, Contact, and other static pages -->
+<!-- AUTO-CONVERTED — manually verify dynamic behaviors, JS interactivity, and variable mappings. -->
+
+<div class="page-template">
+  <div class="page-header py-12 bg-gray-50 border-b border-gray-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="page-title font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        {{ page.title }}
+      </h1>
+      {% if page.summary != blank %}
+        <p class="page-summary text-xl text-gray-600 max-w-2xl mx-auto">
+          {{ page.summary }}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="page-content py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-none">
+        {{ page.content }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional: Include page-specific sections -->
+  {% section 'page-content' %}
+</div>
+
+<style>
+.page-template {
+  font-family: inherit;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  color: hsl(var(--foreground));
+}
+
+.page-summary {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.6;
+}
+
+.page-content {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.prose {
+  color: hsl(var(--foreground));
+}
+
+.prose h2 {
+  font-family: var(--font-serif);
+  color: hsl(var(--foreground));
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose h3 {
+  color: hsl(var(--foreground));
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose p {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.prose a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.prose a:hover {
+  color: hsl(var(--primary) / 0.8);
+}
+
+.prose ul, .prose ol {
+  color: hsl(var(--muted-foreground));
+}
+
+.prose blockquote {
+  border-left: 4px solid hsl(var(--primary));
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: hsl(var(--muted-foreground));
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    padding: 3rem 0;
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+  }
+  
+  .page-content {
+    padding: 3rem 0;
+  }
+}
+</style>

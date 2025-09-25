@@ -1,7 +1,32 @@
 {
   "sections": {
-    "hero": { "type": "hero" },
-    "featured-products": { "type": "featured-products" }
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "Lama'a",
+        "subheading": "Elegance, Plated in Gold.",
+        "description": "Discover timeless jewelry that captures your inner sparkle. Each piece is thoughtfully crafted to celebrate the confident, elegant woman you are.",
+        "primary_button_text": "Shop New Arrivals",
+        "primary_button_url": "/collections",
+        "secondary_button_text": "Our Story", 
+        "secondary_button_url": "/pages/about",
+        "show_scroll_indicator": true
+      }
+    },
+    "featured-collections": {
+      "type": "featured-collections"
+    },
+    "best-sellers": {
+      "type": "best-sellers"
+    },
+    "brand-story": {
+      "type": "brand-story"
+    }
   },
-  "order": ["hero","featured-products"]
+  "order": [
+    "hero",
+    "featured-collections", 
+    "best-sellers",
+    "brand-story"
+  ]
 }

@@ -1,0 +1,291 @@
+<!-- Shopping Cart template -->
+<!-- AUTO-CONVERTED — manually verify dynamic behaviors, JS interactivity, and variable mappings. -->
+
+<div class="cart-template max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  
+  <!-- Cart Header -->
+  <div class="cart-header mb-12 text-center">
+    <h1 class="font-serif text-3xl font-bold text-gray-900 mb-4">Shopping Cart</h1>
+    {% if cart.item_count > 0 %}
+      <p class="text-gray-600">You have {{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %} in your cart</p>
+    {% endif %}
+  </div>
+
+  {% if cart.item_count > 0 %}
+    <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-form">
+      
+      <!-- Cart Items -->
+      <div class="cart-items space-y-6 mb-12">
+        {% for item in cart.items %}
+          <div class="cart-item flex flex-col md:flex-row gap-4 p-6 bg-white rounded-lg border border-gray-200">
+            
+            <!-- Product Image -->
+            <div class="cart-item-image flex-shrink-0">
+              <a href="{{ item.product.url }}" class="block w-24 h-24 md:w-32 md:h-32 rounded-md overflow-hidden">
+                {% if item.image %}
+                  <img src="{{ item.image | img_url: '200x200' }}" 
+                       alt="{{ item.image.alt | default: item.product.title }}" 
+                       class="w-full h-full object-cover">
+                {% else %}
+                  <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+                    <span class="text-gray-400 text-sm">No image</span>
+                  </div>
+                {% endif %}
+              </a>
+            </div>
+
+            <!-- Product Details -->
+            <div class="cart-item-details flex-grow">
+              <div class="flex flex-col md:flex-row md:items-start md:justify-between">
+                
+                <div class="mb-4 md:mb-0">
+                  <h3 class="font-medium text-gray-900 mb-2">
+                    <a href="{{ item.product.url }}" class="hover:text-gray-600 transition-colors">
+                      {{ item.product.title }}
+                    </a>
+                  </h3>
+                  
+                  {% unless item.product.has_only_default_variant %}
+                    <p class="text-sm text-gray-600">{{ item.variant.title }}</p>
+                  {% endunless %}
+                  
+                  {% if item.properties.size > 0 %}
+                    <div class="item-properties mt-2">
+                      {% for property in item.properties %}
+                        <p class="text-sm text-gray-600">{{ property.first }}: {{ property.last }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+
+                <!-- Price and Quantity -->
+                <div class="flex flex-col md:items-end space-y-2">
+                  
+                  <!-- Individual Price -->
+                  <div class="text-right">
+                    {% if item.original_price != item.final_price %}
+                      <span class="text-lg font-semibold text-red-600">{{ item.final_price | money }}</span>
+                      <span class="text-sm text-gray-500 line-through ml-2">{{ item.original_price | money }}</span>
+                    {% else %}
+                      <span class="text-lg font-semibold text-gray-900">{{ item.original_price | money }}</span>
+                    {% endif %}
+                  </div>
+
+                  <!-- Quantity Controls -->
+                  <div class="flex items-center space-x-2">
+                    <label class="text-sm text-gray-600">Qty:</label>
+                    <div class="flex items-center border border-gray-300 rounded">
+                      <button type="button" 
+                              onclick="updateQuantity({{ forloop.index }}, {{ item.quantity }} - 1)"
+                              class="px-2 py-1 hover:bg-gray-50 transition-colors">
+                        -
+                      </button>
+                      <input type="number" 
+                             name="updates[]" 
+                             id="updates_{{ item.key }}"
+                             value="{{ item.quantity }}" 
+                             min="0"
+                             class="w-16 py-1 text-center border-x border-gray-300 focus:outline-none"
+                             onchange="document.querySelector('.cart-form').submit()">
+                      <button type="button" 
+                              onclick="updateQuantity({{ forloop.index }}, {{ item.quantity }} + 1)"
+                              class="px-2 py-1 hover:bg-gray-50 transition-colors">
+                        +
+                      </button>
+                    </div>
+                    
+                    <!-- Remove Item -->
+                    <button type="button" 
+                            onclick="removeItem('{{ item.key }}')"
+                            class="text-red-500 hover:text-red-700 transition-colors p-1"
+                            title="Remove item">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Line Total -->
+                  <div class="text-right">
+                    <span class="font-semibold text-gray-900">{{ item.final_line_price | money }}</span>
+                    {% if item.final_line_price != item.original_line_price %}
+                      <div class="text-sm text-green-600">
+                        You saved {{ item.original_line_price | minus: item.final_line_price | money }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="cart-summary bg-gray-50 rounded-lg p-6 max-w-md ml-auto">
+        <h3 class="font-semibold text-gray-900 mb-4">Order Summary</h3>
+        
+        <div class="space-y-3">
+          <div class="flex justify-between">
+            <span class="text-gray-600">Subtotal ({{ cart.item_count }} items)</span>
+            <span class="font-medium">{{ cart.total_price | money }}</span>
+          </div>
+          
+          {% if cart.total_discounts > 0 %}
+            <div class="flex justify-between text-green-600">
+              <span>Total Savings</span>
+              <span>-{{ cart.total_discounts | money }}</span>
+            </div>
+          {% endif %}
+          
+          <div class="border-t border-gray-200 pt-3">
+            <div class="flex justify-between">
+              <span class="text-sm text-gray-600">Shipping</span>
+              <span class="text-sm text-gray-600">Calculated at checkout</span>
+            </div>
+          </div>
+          
+          <div class="border-t border-gray-200 pt-3">
+            <div class="flex justify-between font-semibold text-lg">
+              <span>Total</span>
+              <span>{{ cart.total_price | money }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkout Button -->
+        <div class="mt-6 space-y-3">
+          <button type="submit" 
+                  name="checkout"
+                  class="w-full bg-gray-900 text-white py-3 px-6 rounded-md hover:bg-gray-800 transition-colors font-medium">
+            Proceed to Checkout
+          </button>
+          
+          <a href="{{ routes.all_products_collection_url }}" 
+             class="block w-full text-center py-3 px-6 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+            Continue Shopping
+          </a>
+        </div>
+      </div>
+    </form>
+
+  {% else %}
+    <!-- Empty Cart -->
+    <div class="empty-cart text-center py-16">
+      <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+      </svg>
+      <h2 class="font-serif text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h2>
+      <p class="text-gray-600 mb-8">Start shopping to fill it up with beautiful jewelry pieces.</p>
+      <a href="{{ routes.all_products_collection_url }}" 
+         class="inline-block bg-gray-900 text-white py-3 px-8 rounded-md hover:bg-gray-800 transition-colors font-medium">
+        Start Shopping
+      </a>
+    </div>
+  {% endif %}
+</div>
+
+<script>
+// Update quantity
+function updateQuantity(lineIndex, newQuantity) {
+  if (newQuantity < 0) return;
+  
+  const input = document.querySelector(`input[name="updates[]"]:nth-of-type(${lineIndex})`);
+  if (input) {
+    input.value = newQuantity;
+    document.querySelector('.cart-form').submit();
+  }
+}
+
+// Remove item from cart
+function removeItem(itemKey) {
+  if (confirm('Are you sure you want to remove this item from your cart?')) {
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: itemKey,
+        quantity: 0
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error('Error removing item:', error);
+    });
+  }
+}
+
+// Auto-update cart on quantity change
+document.addEventListener('DOMContentLoaded', function() {
+  const quantityInputs = document.querySelectorAll('input[name="updates[]"]');
+  
+  quantityInputs.forEach(input => {
+    let timeoutId;
+    
+    input.addEventListener('input', function() {
+      clearTimeout(timeoutId);
+      
+      // Debounce the update
+      timeoutId = setTimeout(() => {
+        if (this.value !== this.defaultValue) {
+          document.querySelector('.cart-form').submit();
+        }
+      }, 1000);
+    });
+  });
+});
+</script>
+
+<style>
+.cart-template {
+  font-family: inherit;
+}
+
+.cart-item {
+  transition: box-shadow 0.2s ease;
+}
+
+.cart-item:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item-image img {
+  transition: transform 0.2s ease;
+}
+
+.cart-item:hover .cart-item-image img {
+  transform: scale(1.05);
+}
+
+.cart-summary {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@media (max-width: 768px) {
+  .cart-item {
+    padding: 1rem;
+  }
+  
+  .cart-summary {
+    max-width: 100%;
+    margin-left: 0;
+    margin-top: 2rem;
+  }
+}
+</style>

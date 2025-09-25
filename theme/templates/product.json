@@ -1,6 +1,23 @@
 {
   "sections": {
-    "main-product": { "type": "main-product" }
+    "main-product": {
+      "type": "main-product",
+      "settings": {
+        "show_related_products": true,
+        "related_products_count": 4
+      }
+    },
+    "recommended-products": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You Might Also Like",
+        "products_to_show": 4,
+        "enable_quick_view": true
+      }
+    }
   },
-  "order": ["main-product"]
+  "order": [
+    "main-product",
+    "recommended-products"
+  ]
 }

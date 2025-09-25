@@ -1,0 +1,135 @@
+<!-- 404 Not Found template -->
+<!-- AUTO-CONVERTED — manually verify dynamic behaviors, JS interactivity, and variable mappings. -->
+
+<div class="error-404 min-h-screen flex items-center justify-center bg-gray-50">
+  <div class="max-w-md mx-auto text-center px-4 sm:px-6 lg:px-8">
+    
+    <!-- 404 Icon -->
+    <div class="mb-8">
+      <svg class="mx-auto h-16 w-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+      </svg>
+    </div>
+
+    <!-- Error Message -->
+    <h1 class="error-title font-serif text-4xl font-bold text-gray-900 mb-4">
+      Page Not Found
+    </h1>
+    
+    <p class="error-message text-lg text-gray-600 mb-8 leading-relaxed">
+      The page you're looking for doesn't exist. It might have been moved, deleted, or you entered the wrong URL.
+    </p>
+
+    <!-- Action Buttons -->
+    <div class="space-y-4">
+      <a href="{{ routes.root_url }}" 
+         class="inline-block w-full bg-gray-900 text-white py-3 px-8 rounded-md hover:bg-gray-800 transition-colors font-medium">
+        Go to Homepage
+      </a>
+      
+      <a href="{{ routes.all_products_collection_url }}" 
+         class="inline-block w-full border border-gray-300 text-gray-700 py-3 px-8 rounded-md hover:bg-gray-50 transition-colors font-medium">
+        Browse Products
+      </a>
+      
+      <button onclick="history.back()" 
+              class="inline-block w-full text-gray-500 py-3 px-8 rounded-md hover:text-gray-700 transition-colors font-medium">
+        Go Back
+      </button>
+    </div>
+
+    <!-- Search -->
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h3 class="text-sm font-medium text-gray-900 mb-4">Looking for something specific?</h3>
+      <form action="{{ routes.search_url }}" method="get" class="flex">
+        <input type="search" 
+               name="q" 
+               placeholder="Search our products..." 
+               class="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+               value="{{ search.terms }}">
+        <button type="submit" 
+                class="px-4 py-2 bg-gray-200 text-gray-700 border border-l-0 border-gray-300 rounded-r-md hover:bg-gray-300 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+.error-404 {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.error-title {
+  font-family: var(--font-serif);
+  color: hsl(var(--foreground));
+}
+
+.error-message {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Button styles */
+.error-404 a, .error-404 button {
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.error-404 a:first-of-type {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.error-404 a:first-of-type:hover {
+  background: hsl(var(--primary) / 0.9);
+}
+
+.error-404 a:nth-of-type(2) {
+  border-color: hsl(var(--border));
+  color: hsl(var(--foreground));
+}
+
+.error-404 a:nth-of-type(2):hover {
+  background: hsl(var(--accent));
+}
+
+/* Search form */
+.error-404 input[type="search"] {
+  border-color: hsl(var(--border));
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.error-404 input[type="search"]:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: hsl(var(--primary));
+  border-color: transparent;
+}
+
+.error-404 form button {
+  background: hsl(var(--accent));
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+.error-404 form button:hover {
+  background: hsl(var(--accent) / 0.8);
+}
+
+@media (max-width: 640px) {
+  .error-404 {
+    padding: 2rem 0;
+  }
+  
+  .error-title {
+    font-size: 2.5rem;
+  }
+}
+</style>
