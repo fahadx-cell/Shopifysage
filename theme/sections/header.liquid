@@ -1,44 +1,134 @@
-<header class="site-header">
-  <div class="container">
-    <div class="header-wrapper">
+<!-- AUTO-CONVERTED — manually verify dynamic behaviors, JS interactivity, and variable mappings. -->
+
+<header class="site-header sticky top-0 z-50 bg-white border-b border-gray-200">
+  <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="header-wrapper flex items-center justify-between h-16">
       <!-- Logo -->
       <div class="header-logo">
-        {% if section.settings.logo %}
-          <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ shop.name }}">
-        {% else %}
-          <h1>{{ section.settings.brand_name | default: shop.name }}</h1>
-        {% endif %}
+        <a href="{{ routes.root_url }}" class="font-serif text-2xl font-bold text-gray-900 hover:text-gray-700 px-2 py-1 rounded-md">
+          {% if section.settings.logo %}
+            <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ shop.name }}" class="h-8">
+          {% else %}
+            {{ section.settings.brand_name | default: "Lama'a" }}
+          {% endif %}
+        </a>
       </div>
 
-      <!-- Navigation -->
-      <nav class="header-nav">
+      <!-- Desktop Navigation -->
+      <nav class="header-nav hidden md:flex items-center space-x-8">
+        <a href="{{ routes.root_url }}" class="text-sm font-medium transition-colors hover:text-gray-900 text-gray-600">Home</a>
+        <a href="{{ routes.collections_url }}" class="text-sm font-medium transition-colors hover:text-gray-900 text-gray-600">Collections</a>
+        {% if pages.about %}
+          <a href="{{ pages.about.url }}" class="text-sm font-medium transition-colors hover:text-gray-900 text-gray-600">About</a>
+        {% endif %}
         {% for link in linklists.main-menu.links %}
-          <a href="{{ link.url }}">{{ link.title }}</a>
+          <a href="{{ link.url }}" class="text-sm font-medium transition-colors hover:text-gray-900 text-gray-600">{{ link.title }}</a>
         {% endfor %}
       </nav>
 
       <!-- Actions -->
-      <div class="header-actions">
+      <div class="header-actions flex items-center space-x-4">
         <!-- Search -->
-        <form action="{{ routes.search_url }}" method="get" class="search-form">
-          <input type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}">
-          <button type="submit">Search</button>
-        </form>
+        {% if section.settings.enable_search %}
+        <div class="search-container relative">
+          <button id="search-toggle" class="p-2 text-gray-600 hover:text-gray-900 hidden md:block">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+          <div id="search-form" class="search-form hidden absolute right-0 top-full mt-2 w-64">
+            <form action="{{ routes.search_url }}" method="get" class="flex">
+              <input type="search" name="q" placeholder="Search jewelry..." 
+                     class="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                     value="{{ search.terms }}">
+              <button type="submit" class="px-3 py-2 bg-gray-900 text-white rounded-r-md hover:bg-gray-800">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+        {% endif %}
 
-        <!-- Cart -->
-        <a href="{{ routes.cart_url }}" class="cart-link">
-          Cart (<span id="cart-count">{{ cart.item_count }}</span>)
+        <!-- Shopping Cart -->
+        <a href="{{ routes.cart_url }}" class="cart-link relative p-2 text-gray-600 hover:text-gray-900">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+          {% if cart.item_count > 0 %}
+            <span class="absolute -top-2 -right-2 h-5 w-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+              {{ cart.item_count }}
+            </span>
+          {% endif %}
         </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-toggle" class="md:hidden p-2 text-gray-600 hover:text-gray-900">
+          <svg id="menu-icon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg id="close-icon" class="h-5 w-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
       </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="mobile-nav md:hidden border-t border-gray-200 hidden">
+      <nav class="py-4 space-y-2">
+        <a href="{{ routes.root_url }}" class="block px-3 py-2 text-base font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50">Home</a>
+        <a href="{{ routes.collections_url }}" class="block px-3 py-2 text-base font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50">Collections</a>
+        {% if pages.about %}
+          <a href="{{ pages.about.url }}" class="block px-3 py-2 text-base font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50">About</a>
+        {% endif %}
+        {% for link in linklists.main-menu.links %}
+          <a href="{{ link.url }}" class="block px-3 py-2 text-base font-medium rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-50">{{ link.title }}</a>
+        {% endfor %}
+      </nav>
     </div>
   </div>
 </header>
+
+<script>
+// Mobile menu toggle
+document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+  const menu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+  
+  menu.classList.toggle('hidden');
+  menuIcon.classList.toggle('hidden');
+  closeIcon.classList.toggle('hidden');
+});
+
+// Search toggle for desktop
+{% if section.settings.enable_search %}
+document.getElementById('search-toggle').addEventListener('click', function() {
+  const searchForm = document.getElementById('search-form');
+  searchForm.classList.toggle('hidden');
+  if (!searchForm.classList.contains('hidden')) {
+    searchForm.querySelector('input').focus();
+  }
+});
+
+// Hide search when clicking outside
+document.addEventListener('click', function(event) {
+  const searchContainer = document.querySelector('.search-container');
+  const searchForm = document.getElementById('search-form');
+  
+  if (!searchContainer.contains(event.target)) {
+    searchForm.classList.add('hidden');
+  }
+});
+{% endif %}
+</script>
 
 <style>
 .site-header {
   background: hsl(var(--background));
   border-bottom: 1px solid hsl(var(--border));
-  padding: 1rem 0;
 }
 
 .container {
@@ -47,22 +137,10 @@
   padding: 0 1rem;
 }
 
-.header-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header-logo h1 {
+.header-logo a {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
-  margin: 0;
   color: hsl(var(--foreground));
-}
-
-.header-nav {
-  display: flex;
-  gap: 2rem;
+  text-decoration: none;
 }
 
 .header-nav a {
@@ -75,27 +153,25 @@
   color: hsl(var(--primary));
 }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.search-form {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.search-form input {
-  padding: 0.5rem;
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-}
-
 .cart-link {
   text-decoration: none;
   color: hsl(var(--foreground));
-  font-weight: 500;
+}
+
+.search-form {
+  background: white;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-nav a {
+  transition: all 0.2s ease;
+}
+
+.mobile-nav a:hover {
+  background: hsl(var(--accent));
+  color: hsl(var(--primary));
 }
 </style>
 
@@ -112,7 +188,13 @@
       "type": "text",
       "id": "brand_name",
       "label": "Brand name",
-      "default": "My Store"
+      "default": "Lama'a"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_search",
+      "label": "Enable Search",
+      "default": true
     }
   ]
 }
