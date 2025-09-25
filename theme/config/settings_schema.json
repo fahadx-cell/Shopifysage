@@ -1,9 +1,471 @@
 [
   {
-    "name": "Theme settings",
+    "name": "Colors",
     "settings": [
-      { "type": "color", "id": "primary_color", "label": "Primary color", "default": "#111827" },
-      { "type": "text", "id": "brand_name", "label": "Brand name", "default": "My Store" }
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "primary_color",
+        "label": "Primary color",
+        "default": "#111827",
+        "info": "Used for buttons, links, and accents"
+      },
+      {
+        "type": "color",
+        "id": "secondary_color",
+        "label": "Secondary color", 
+        "default": "#6B7280",
+        "info": "Used for secondary elements and muted text"
+      },
+      {
+        "type": "header",
+        "content": "Text Colors"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Primary text color",
+        "default": "#111827"
+      },
+      {
+        "type": "color",
+        "id": "text_color_light",
+        "label": "Secondary text color",
+        "default": "#6B7280"
+      },
+      {
+        "type": "header",
+        "content": "Background Colors"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "card_background_color",
+        "label": "Card background color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "border_color",
+        "label": "Border color",
+        "default": "#E5E7EB"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Font Settings"
+      },
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Heading font",
+        "default": "assistant"
+      },
+      {
+        "type": "font_picker", 
+        "id": "body_font",
+        "label": "Body font",
+        "default": "assistant"
+      },
+      {
+        "type": "range",
+        "id": "base_font_size",
+        "label": "Base font size",
+        "min": 14,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logo Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Logo text",
+        "default": "Lama'a",
+        "info": "Used when no logo image is uploaded"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width",
+        "min": 100,
+        "max": 300,
+        "step": 10,
+        "unit": "px",
+        "default": 200
+      },
+      {
+        "type": "header",
+        "content": "Navigation Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search",
+        "label": "Show search",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_header",
+        "label": "Sticky header",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Information"
+      },
+      {
+        "type": "text",
+        "id": "footer_brand_name",
+        "label": "Brand name",
+        "default": "Lama'a"
+      },
+      {
+        "type": "textarea",
+        "id": "footer_description",
+        "label": "Brand description",
+        "default": "Elegance, Plated in Gold. Discover jewelry that celebrates your unique sparkle and confident style."
+      },
+      {
+        "type": "header",
+        "content": "Newsletter Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_newsletter",
+        "label": "Show newsletter signup",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "newsletter_title",
+        "label": "Newsletter title",
+        "default": "Stay in the Loop"
+      },
+      {
+        "type": "textarea",
+        "id": "newsletter_description",
+        "label": "Newsletter description",
+        "default": "Be the first to know about new collections, exclusive offers, and styling tips."
+      },
+      {
+        "type": "header",
+        "content": "Contact Information"
+      },
+      {
+        "type": "email",
+        "id": "contact_email",
+        "label": "Contact email",
+        "default": "hello@lamaa.com"
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Contact phone",
+        "default": "+92 21 1234 5678"
+      },
+      {
+        "type": "text",
+        "id": "contact_address",
+        "label": "Contact address",
+        "default": "Karachi, Pakistan"
+      },
+      {
+        "type": "header",
+        "content": "Social Media Links"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_url",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_text",
+        "label": "Instagram text",
+        "default": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_url", 
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_text",
+        "label": "Facebook text",
+        "default": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter_url",
+        "label": "Twitter URL"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_text",
+        "label": "Twitter text",
+        "default": "Twitter"
+      }
+    ]
+  },
+  {
+    "name": "Hero Section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_background_image",
+        "label": "Hero background image"
+      },
+      {
+        "type": "text",
+        "id": "hero_heading",
+        "label": "Hero heading",
+        "default": "Lama'a"
+      },
+      {
+        "type": "text",
+        "id": "hero_subheading",
+        "label": "Hero subheading", 
+        "default": "Elegance, Plated in Gold."
+      },
+      {
+        "type": "textarea",
+        "id": "hero_description",
+        "label": "Hero description",
+        "default": "Discover timeless jewelry that captures your inner sparkle. Each piece is thoughtfully crafted to celebrate the confident, elegant woman you are."
+      },
+      {
+        "type": "header",
+        "content": "Hero Buttons"
+      },
+      {
+        "type": "text",
+        "id": "hero_primary_button_text",
+        "label": "Primary button text",
+        "default": "Shop New Arrivals"
+      },
+      {
+        "type": "url",
+        "id": "hero_primary_button_url",
+        "label": "Primary button URL"
+      },
+      {
+        "type": "text",
+        "id": "hero_secondary_button_text",
+        "label": "Secondary button text",
+        "default": "Our Story"
+      },
+      {
+        "type": "url",
+        "id": "hero_secondary_button_url",
+        "label": "Secondary button URL"
+      },
+      {
+        "type": "checkbox",
+        "id": "hero_show_scroll_indicator",
+        "label": "Show scroll indicator",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Product Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product Display"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show product vendor",
+        "default": false,
+        "info": "Display the product vendor/brand name"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_sku",
+        "label": "Show product SKU",
+        "default": false,
+        "info": "Display the product SKU/code"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_product_type",
+        "label": "Show product type",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_quick_view",
+        "label": "Enable quick view",
+        "default": true,
+        "info": "Allow customers to view product details without leaving the collection page"
+      },
+      {
+        "type": "header",
+        "content": "Product Images"
+      },
+      {
+        "type": "select",
+        "id": "product_image_aspect_ratio",
+        "label": "Product image aspect ratio",
+        "options": [
+          {
+            "value": "square",
+            "label": "Square (1:1)"
+          },
+          {
+            "value": "portrait",
+            "label": "Portrait (3:4)"
+          },
+          {
+            "value": "landscape",
+            "label": "Landscape (4:3)"
+          }
+        ],
+        "default": "square"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_image_zoom",
+        "label": "Enable image zoom on hover",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Product Grid"
+      },
+      {
+        "type": "range",
+        "id": "products_per_row_desktop",
+        "label": "Products per row on desktop",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "products_per_row_mobile",
+        "label": "Products per row on mobile",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "default": 2
+      }
+    ]
+  },
+  {
+    "name": "Cart Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Cart Behavior"
+      },
+      {
+        "type": "select",
+        "id": "cart_action",
+        "label": "When a product is added to cart",
+        "options": [
+          {
+            "value": "stay",
+            "label": "Stay on current page"
+          },
+          {
+            "value": "drawer",
+            "label": "Open cart drawer"
+          },
+          {
+            "value": "page",
+            "label": "Go to cart page"
+          }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_cart_notes",
+        "label": "Enable cart notes",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping threshold",
+        "default": "75",
+        "info": "Amount for free shipping (without currency symbol)"
+      }
+    ]
+  },
+  {
+    "name": "Search Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Search Configuration"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search",
+        "label": "Enable predictive search",
+        "default": true,
+        "info": "Show search suggestions as customers type"
+      },
+      {
+        "type": "checkbox",
+        "id": "search_products",
+        "label": "Search products",
+        "default": true
+      },
+      {
+        "type": "checkbox", 
+        "id": "search_collections",
+        "label": "Search collections",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "search_pages",
+        "label": "Search pages",
+        "default": true
+      }
     ]
   }
 ]
