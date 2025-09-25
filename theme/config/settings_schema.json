@@ -1,0 +1,9 @@
+[
+  {
+    "name": "Theme settings",
+    "settings": [
+      { "type": "color", "id": "primary_color", "label": "Primary color", "default": "#111827" },
+      { "type": "text", "id": "brand_name", "label": "Brand name", "default": "My Store" }
+    ]
+  }
+]

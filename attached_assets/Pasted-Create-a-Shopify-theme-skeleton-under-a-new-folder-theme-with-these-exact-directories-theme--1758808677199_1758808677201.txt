@@ -1,0 +1,65 @@
+Create a Shopify theme skeleton under a new folder `theme/` with these exact directories:
+theme/
+  assets/
+  config/
+  layout/
+  locales/
+  sections/
+  snippets/
+  templates/
+
+Create these starter files with the content explained below:
+
+1) layout/theme.liquid — include minimal valid Shopify layout:
+<!DOCTYPE html>
+<html lang="{{ shop.locale }}">
+<head>
+  {{ content_for_header }}
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+  {{ content_for_additional_head }}
+</head>
+<body>
+  {% section 'header' %}
+  {{ content_for_layout }}
+  {% section 'footer' %}
+  <script src="{{ 'theme.js' | asset_url }}"></script>
+  {{ content_for_footer }}
+</body>
+</html>
+
+2) assets/theme.css — copy top-level CSS from repo if exists (client/index.css or main CSS). If Tailwind is used, compile the core Tailwind output into this file or create a placeholder with an instruction comment.
+
+3) assets/theme.js — empty file with a comment: "Add front-end JS here. Keep heavy SPA logic out of theme."
+
+4) config/settings_schema.json — create a starter schema with a Colors and Typography section and example settings:
+[
+  {
+    "name": "Theme settings",
+    "settings": [
+      { "type": "color", "id": "primary_color", "label": "Primary color", "default": "#111827" },
+      { "type": "text", "id": "brand_name", "label": "Brand name", "default": "My Store" }
+    ]
+  }
+]
+
+5) locales/en.default.json — create a minimal JSON with "general" strings.
+
+6) templates/index.json — create a JSON template referencing a `hero` and `featured-products` sections:
+{
+  "sections": {
+    "hero": { "type": "hero" },
+    "featured-products": { "type": "featured-products" }
+  },
+  "order": ["hero","featured-products"]
+}
+
+7) templates/product.json — create a JSON template referencing `main-product` section.
+
+8) sections/header.liquid and sections/footer.liquid — create basic markup with schema and placeholders for navigation and logo (no JS required).
+
+9) sections/hero.liquid — create a section with a schema for heading, subheading and image_picker.
+
+10) snippets/product-card.liquid — create a small reusable product-card placeholder.
+
+After creating, list the exact paths you created and confirm file sizes (bytes). If any source CSS or images were copied into assets/, list them with original and new path.

@@ -1,0 +1,1 @@
+// Add front-end JS here. Keep heavy SPA logic out of theme.

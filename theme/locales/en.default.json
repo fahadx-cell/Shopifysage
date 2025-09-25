@@ -1,0 +1,25 @@
+{
+  "general": {
+    "accessibility": {
+      "loading": "Loading...",
+      "close": "Close",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "buttons": {
+      "add_to_cart": "Add to cart",
+      "view_product": "View product",
+      "shop_now": "Shop now"
+    },
+    "cart": {
+      "title": "Cart",
+      "empty": "Your cart is empty",
+      "total": "Total",
+      "checkout": "Checkout"
+    },
+    "search": {
+      "placeholder": "Search...",
+      "no_results": "No results found"
+    }
+  }
+}

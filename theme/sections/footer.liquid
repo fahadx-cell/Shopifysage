@@ -1,0 +1,204 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <h3>{{ section.settings.brand_name | default: shop.name }}</h3>
+        <p>{{ section.settings.description }}</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        {% for link in linklists.footer.links %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endfor %}
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-newsletter">
+        <h4>{{ section.settings.newsletter_title }}</h4>
+        <p>{{ section.settings.newsletter_text }}</p>
+        <form action="{{ routes.root_url }}contact#footer-newsletter" method="post" class="newsletter-form">
+          <input type="email" name="contact[email]" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+
+      <!-- Social Links -->
+      <div class="footer-social">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          {% if section.settings.social_instagram %}
+            <a href="{{ section.settings.social_instagram }}" target="_blank">Instagram</a>
+          {% endif %}
+          {% if section.settings.social_facebook %}
+            <a href="{{ section.settings.social_facebook }}" target="_blank">Facebook</a>
+          {% endif %}
+          {% if section.settings.social_twitter %}
+            <a href="{{ section.settings.social_twitter }}" target="_blank">Twitter</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="{{ pages.privacy-policy.url }}">Privacy Policy</a>
+        <a href="{{ pages.terms-of-service.url }}">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+.site-footer {
+  background: hsl(var(--card));
+  border-top: 1px solid hsl(var(--border));
+  padding: 3rem 0 1rem;
+  margin-top: 4rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-brand h3 {
+  font-family: var(--font-serif);
+  color: hsl(var(--foreground));
+  margin-bottom: 1rem;
+}
+
+.footer-brand p {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.6;
+}
+
+.footer-links h4, .footer-newsletter h4, .footer-social h4 {
+  color: hsl(var(--foreground));
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.footer-links a {
+  display: block;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: hsl(var(--primary));
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+}
+
+.newsletter-form button {
+  padding: 0.75rem 1.5rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  text-decoration: none;
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s;
+}
+
+.social-links a:hover {
+  color: hsl(var(--primary));
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid hsl(var(--border));
+  color: hsl(var(--muted-foreground));
+}
+
+.footer-legal {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-legal a {
+  text-decoration: none;
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s;
+}
+
+.footer-legal a:hover {
+  color: hsl(var(--primary));
+}
+</style>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "My Store"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Brand description"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter title",
+      "default": "Stay in the Loop"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter description"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "social_twitter",
+      "label": "Twitter URL"
+    }
+  ]
+}
+{% endschema %}

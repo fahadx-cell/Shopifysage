@@ -1,0 +1,222 @@
+{% comment %}
+  Product card snippet
+  Usage: {% render 'product-card', product: product %}
+{% endcomment %}
+
+<div class="product-card hover-elevate">
+  <a href="{{ product.url }}" class="product-card-link">
+    <!-- Product Image -->
+    <div class="product-card-image">
+      {% if product.featured_media %}
+        <img src="{{ product.featured_media | img_url: '400x400' }}" 
+             alt="{{ product.featured_media.alt | default: product.title }}"
+             loading="lazy">
+      {% else %}
+        <div class="product-card-placeholder">No image</div>
+      {% endif %}
+      
+      <!-- Badges -->
+      <div class="product-card-badges">
+        {% if product.compare_at_price > product.price %}
+          <span class="product-badge sale-badge">Sale</span>
+        {% endif %}
+        {% if product.tags contains 'featured' %}
+          <span class="product-badge featured-badge">Featured</span>
+        {% endif %}
+        {% if product.tags contains 'bestseller' %}
+          <span class="product-badge bestseller-badge">Best Seller</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-card-info">
+      <h3 class="product-card-title">{{ product.title }}</h3>
+      
+      {% if product.description != blank %}
+        <p class="product-card-description">{{ product.description | strip_html | truncate: 80 }}</p>
+      {% endif %}
+
+      <div class="product-card-price">
+        {% if product.compare_at_price > product.price %}
+          <span class="price-sale">{{ product.price | money }}</span>
+          <span class="price-compare">{{ product.compare_at_price | money }}</span>
+        {% else %}
+          <span class="price-regular">{{ product.price | money }}</span>
+        {% endif %}
+      </div>
+
+      {% if product.type != blank %}
+        <span class="product-card-type">{{ product.type }}</span>
+      {% endif %}
+    </div>
+  </a>
+
+  <!-- Add to Cart Button -->
+  <div class="product-card-actions">
+    <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button type="submit" 
+              class="btn btn-primary add-to-cart-btn"
+              {% unless product.available %}disabled{% endunless %}>
+        {% if product.available %}
+          {{ 'general.buttons.add_to_cart' | t }}
+        {% else %}
+          Sold Out
+        {% endif %}
+      </button>
+    </form>
+  </div>
+</div>
+
+<style>
+.product-card {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.product-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.product-card-image {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: hsl(var(--muted));
+}
+
+.product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-card-image img {
+  transform: scale(1.05);
+}
+
+.product-card-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+}
+
+.product-card-badges {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.product-badge {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: calc(var(--radius) / 2);
+  color: white;
+}
+
+.sale-badge {
+  background: hsl(var(--destructive));
+}
+
+.featured-badge {
+  background: hsl(var(--primary));
+}
+
+.bestseller-badge {
+  background: hsl(var(--chart-1));
+}
+
+.product-card-info {
+  padding: 1rem;
+}
+
+.product-card-title {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  font-size: 1rem;
+  color: hsl(var(--foreground));
+}
+
+.product-card-description {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.product-card-price {
+  margin-bottom: 0.5rem;
+}
+
+.price-regular {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: hsl(var(--primary));
+}
+
+.price-sale {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: hsl(var(--destructive));
+  margin-right: 0.5rem;
+}
+
+.price-compare {
+  text-decoration: line-through;
+  color: hsl(var(--muted-foreground));
+  font-size: 1rem;
+}
+
+.product-card-type {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  text-transform: capitalize;
+}
+
+.product-card-actions {
+  padding: 0 1rem 1rem;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: hsl(var(--primary) / 0.9);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+</style>
