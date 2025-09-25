@@ -1,0 +1,102 @@
+You are an automated code auditor + functional tester for an e-commerce site. The repo for the store is present in this workspace. Your job: **verify each common e-commerce function is implemented and working** (except the final payment/checkout page which Shopify handles). Use two approaches: (A) run-time tests if you can start a local server/Dev environment, and (B) static code analysis if runtime is unavailable. For each function below, attempt runtime verification first; if not possible, fall back to static checks (file existence, Liquid tags, forms, API endpoints, JS handlers).
+
+OUTPUT: a single markdown report table with these columns:
+- Function
+- Status — PASS / FAIL / NOT FOUND / PARTIAL
+- Evidence — if runtime: example HTTP request + response or browser console error screenshot text; if static: file path(s) and code excerpts (max 10 lines) proving presence or absence
+- Steps to reproduce (one-liner the exact command or browser action)
+- Fix recommendation (concise, max 2 lines)
+
+If Status is FAIL or PARTIAL, include **exact code snippet(s)** that need changing (and a 1–2 line code fix suggestion).
+
+Run checks for these functions (check them in this order):
+
+1. Project start / dev server
+   - Can the project start (`npm run dev`, `npm start`, or `shopify theme dev`)?
+   - Check build step for theme assets (Tailwind/build scripts).
+2. Homepage rendering
+   - Homepage loads, hero shows, featured products block present.
+3. Collection / category pages
+   - Product grids render (with product title, price, image).
+4. Product detail page
+   - Product title, images, price, description, vendor displayed.
+5. Variant selection
+   - Variants selectable and selected variant ID is available for Add-to-cart.
+6. Add to cart (standard form)
+   - `<form action="/cart/add" method="post">` or AJAX `/cart/add.js` works. When adding a product, cart count increments.
+7. Add to cart (quick add / from collection)
+   - Quick-add buttons add correct product/variant.
+8. Cart page listing
+   - Cart page lists items, quantities, subtotal, and product links.
+9. Update quantity on cart page
+   - Changing quantity updates totals and persists on refresh.
+10. Remove item from cart
+    - Remove (delete) action removes item and updates totals.
+11. Mini-cart / cart drawer
+    - Mini-cart shows added items and updates live.
+12. Cart persistence
+    - Cart persists across page refresh and browser session (cookies/localStorage check).
+13. Cart notes & cart attributes
+    - Cart note field or custom attributes are present and saved.
+14. Discount code application (cart-level)
+    - UI exists to enter discount codes or provides link to apply codes.
+15. Inventory / out-of-stock handling
+    - Out-of-stock variants are disabled / show "Sold out" and cannot be added.
+16. Price formatting & currency
+    - Prices use `| money` or proper formatting; currency switcher (if present) works.
+17. Product image gallery & zoom / carousel
+    - Gallery thumbnails, main image switching, and lightbox/zoom work.
+18. Lazy-loading & responsive images
+    - `loading="lazy"` or srcset used; images change size for breakpoints.
+19. Related / recommended products
+    - Related products or "You may also like" section shows relevant items.
+20. Search functionality
+    - Site search returns relevant product results.
+21. Collection filters & sorting
+    - Working filters (tags, price) and sorting options exist and update results.
+22. Pagination or infinite scroll
+    - Pagination links or infinite scroll load next set of products.
+23. Add-to-wishlist (if present)
+    - Wishlist add/remove persists for session or user.
+24. Customer account flows
+    - Login, register, recover password forms exist and submit (do not test credentials).
+25. Contact / form submissions
+    - Contact form posts to correct endpoint and returns success status.
+26. Header / navigation links
+    - Main nav links work; mobile nav toggles open/close without JS errors.
+27. Footer links & policy pages
+    - Footer contains links to Privacy/Terms/Contact and they load.
+28. Cart & product structured data (SEO)
+    - Check for `application/ld+json` product schema or meta tags for products.
+29. SEO: title/meta/og tags
+    - Pages include `<title>`, `<meta name="description">`, and OpenGraph tags.
+30. Sitemap & robots (theme-level)
+    - Check for `templates/robots.txt` or sitemap references in theme code.
+31. Favicon & theme assets loading
+    - `favicon.ico` or link present and assets load (no 404s).
+32. Theme settings & schema
+    - `config/settings_schema.json` exists and references main sections/settings.
+33. Localization / locales
+    - `locales/en.default.json` present; detect use of `t` or translation filters.
+34. Currency & locale formats (if multi-currency)
+    - Currency formatting and switching behavior present (if repo includes it).
+35. Accessibility basics
+    - Images have `alt`, buttons have `aria` where applicable, forms have labels.
+36. Console & network errors
+    - Check browser console for JS errors and network 4xx/5xx on page load.
+37. Performance quick check
+    - Detect unminified heavy JS, very large images (>1MB), or missing `defer` on scripts.
+38. 404 page & password page
+    - `templates/404.liquid` and `layout/password.liquid` exist and render.
+39. Theme compatibility for Shopify Online Store 2.0
+    - Presence of JSON templates in `templates/*.json`, sections in JSON templates, use of `blocks`.
+40. Build artifacts & deploy readiness
+    - All compiled assets required by theme exist in `theme/assets/` (CSS+JS built outputs).
+
+ADDITIONAL INSTRUCTIONS:
+- If you can start a local dev preview (shopify theme dev or `npm run dev`) run the run-time tests using automated HTTP calls (curl/fetch) and DOM checks (jsdom or puppeteer if available). If not available, do static analysis only and mark runtime tests as NOT RUN.
+- For each runtime test include the exact HTTP request or browser action you used and the key response or DOM assertion (copy-pasteable).
+- Prioritize actionable fixes. For each failing item give an exact one-line code change or file to edit.
+- End the report with a concise (max 8) prioritized action list to get the theme to a deployable state.
+
+Return only the report (markdown). Do not modify any files unless explicitly asked later.  
