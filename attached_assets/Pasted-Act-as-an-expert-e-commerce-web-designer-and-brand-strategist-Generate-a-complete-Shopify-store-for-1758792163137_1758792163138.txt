@@ -1,0 +1,81 @@
+Act as an expert e-commerce web designer and brand strategist. Generate a complete Shopify store for a new gold-plated jewelry brand named "Lama'a".
+
+1. Brand Identity:
+
+Brand Name: Lama'a
+
+Tagline: Elegance, Plated in Gold.
+
+Brand Essence: The brand is sophisticated, elegant, and modern, offering accessible luxury. The name "Lama'a" means "glimmer" or "sparkle," so the site should feel bright, refined, and aspirational yet attainable.
+
+Target Audience: Stylish Pakistani women in their mid-20s and early 30s who appreciate quality craftsmanship and timeless design.
+
+2. Visual Design & Aesthetics:
+
+Overall Feel: Clean, minimalist, and luxurious with a content-focused layout. The design should feel airy and high-end, allowing the product photography to be the hero.
+
+Color Palette:
+
+Primary Backgrounds: Ivory (#FFFFF0). This should be the main background color for a clean, spacious feel.
+
+Headings & Body Text: A very dark, sophisticated charcoal (#212121) for maximum readability and elegance.
+
+Primary Accent & Buttons (CTAs): A rich, burnished gold (#C5B358). Use this for "Add to Cart," "Shop Now," and other key buttons.
+
+Secondary Accent: A deep, luxurious emerald green (#005C55 or #224229). Use this for section backgrounds, announcement bars, or decorative elements to create contrast and depth.
+
+Typography:
+
+Headings: Use an elegant serif font like "Playfair Display" or "Cormorant Garamond" to reflect the sophistication of the logo.
+
+Body Text & Paragraphs: Use a clean, highly-readable sans-serif font like "Lato" or "Montserrat" for product descriptions and other text.
+
+Imagery Style:
+
+Use placeholders for high-resolution, sharp, and detailed product photography on neutral backgrounds.
+
+The main lifestyle images and banners should feature a fair-skinned Pakistani model in her mid-20s, exuding confidence and grace.
+
+Incorporate sophisticated flat lay images that use props in the brand's color palette (ivory fabrics, emerald velvet, subtle gold elements).
+
+3. Website Structure & Pages:
+
+Homepage:
+
+A full-width hero banner with a captivating lifestyle image, the brand name "Lama'a," the tagline "Elegance, Plated in Gold," and a clear "Shop New Arrivals" button in the burnished gold color.
+
+A section below for "Featured Collections" (e.g., "Necklaces," "Earrings," "Sets").
+
+A grid showcasing "Best Sellers" with high-quality product images and quick-view functionality.
+
+A dedicated section with an elegant image and a short paragraph about the brand's story and commitment to quality craftsmanship.
+
+An integrated, shoppable Instagram feed at the bottom to feature high-end user-generated content and brand photos.
+
+A footer with links to all essential pages, social media icons, and a newsletter sign-up form.
+
+Product Page:
+
+A clean layout with a gallery of multiple high-resolution images on the left (showing the product on a model, alone, and a close-up detail shot).
+
+Product title, price, a short, elegant description, and an "Add to Cart" button on the right.
+
+Include clear drop-down sections below for "Materials & Care" and "Shipping & Returns."
+
+A "You Might Also Like" section at the bottom to showcase related products.
+
+Collections Page:
+
+A clean grid layout of products.
+
+Implement filtering options on the side or top to sort by "Product Type," "Price," and "Newest."
+
+About Us Page:
+
+Create a page that tells the story behind Lama'a. Use a warm and inviting tone. Explain the meaning of the name and the vision for providing beautiful, high-quality jewelry.
+
+4. Tone of Voice for Copy:
+
+The copywriting across the site should be elegant, warm, sophisticated, and empowering. The language should make the customer feel confident and beautiful.
+
+Please generate the store with this complete vision in mind.
